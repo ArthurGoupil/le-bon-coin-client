@@ -1,56 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import axios from 'axios';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import Header from './components/Header';
 import Offers from './pages/Offers';
 import Offer from './pages/Offer';
+import Footer from './components/Footer';
 
-library.add(faUser, faPlusSquare, faSearch);
+library.add(faUser, faPlusSquare, faSearch, faCartPlus);
 
 const App = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        'https://leboncoin-api.herokuapp.com/api/offer/with-count'
-      );
-      setData(response.data);
-      setIsLoading(false);
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <Router>
       <Header />
-      {!isLoading ? (
-        <main>
-          <div className="main-container d-flex justify-center">
-            <Switch>
-              <Route path="/offer/">
-                <Offer></Offer>
-              </Route>
-              <Route path="/">
-                <Offers></Offers>
-              </Route>
-            </Switch>
-          </div>
-        </main>
-      ) : (
-        <div>En cours de chargement...</div>
-      )}
+      <main>
+        <div className="main-container d-flex align-center flex-column">
+          <Switch>
+            <Route path="/offer/:id">
+              <Offer></Offer>
+            </Route>
+            <Route path="/">
+              <Offers></Offers>
+            </Route>
+          </Switch>
+        </div>
+      </main>
+      <Footer />
     </Router>
   );
 };

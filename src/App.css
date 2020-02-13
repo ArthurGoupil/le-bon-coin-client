@@ -24,8 +24,27 @@ button {
   font-size: 1.9rem;
   color: var(--black);
 }
+header {
+  position: sticky;
+  top: 0;
+  background-color: var(--background);
+  z-index: 10;
+}
 main {
   background-color: var(--background);
+}
+footer {
+  background-color: #3e3e3e;
+  color: white;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: var(--black);
 }
 
 /* FLEXBOX */
@@ -52,17 +71,35 @@ main {
 }
 
 /* FONTS */
+.is-bld,
+.is-bld a {
+  font-weight: bold;
+}
+.is-blue {
+  color: var(--blue);
+}
+.is-orange {
+  color: var(--orange);
+}
 .is-15 {
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
 }
 .is-16 {
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
 }
 .is-18 {
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+}
+.is-20 {
+  font-size: 2rem;
+  line-height: 2.3rem;
+}
+.is-23 {
+  font-size: 2.3rem;
+  line-height: 3.2rem;
 }
 
 /* HEADER STYLING */
@@ -70,6 +107,18 @@ main {
   width: 100%;
   height: 60px;
   background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+.orange-ellipse {
+  width: 110%;
+  box-sizing: content-box;
+  height: 100px;
+  background-color: var(--orange);
+  border-radius: 0 0 600px 600px/0 0 100px 100px;
+  position: absolute;
+  top: 60px;
+  left: -5%;
+  z-index: 0;
 }
 .header-top-center {
   width: 96vw;
@@ -85,7 +134,7 @@ main {
 }
 /* User connect */
 .icon-user {
-  font-size: 20px;
+  font-size: 2rem;
   margin-bottom: 5px;
 }
 .user-connect {
@@ -108,6 +157,7 @@ main {
 .selected-header:after {
   position: absolute;
   bottom: 0;
+  left: 0;
   content: '';
   width: 100%;
   border-bottom: 3px solid var(--orange);
@@ -121,11 +171,11 @@ main {
   padding: 8px;
   cursor: pointer;
 }
-.post-offer-button-header:hover {
+.orange-button-hover:hover {
   background-color: var(--dark-orange);
 }
 .icon-plus {
-  font-size: 23px;
+  font-size: 2.3rem;
 }
 /* Search */
 .search-header {
@@ -134,7 +184,7 @@ main {
   height: 100%;
 }
 .icon-search {
-  font-size: 25px;
+  font-size: 2.5rem;
   margin-right: 10px;
 }
 
@@ -146,6 +196,7 @@ main {
   border-radius: 5px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
   margin: 35px 0;
+  z-index: 1;
 }
 .search-box-input-icon {
   position: relative;
@@ -175,4 +226,113 @@ main {
   color: white;
   margin-left: 21px;
   cursor: pointer;
+}
+
+/* LINE OFFER */
+.line-offer {
+  width: var(--center);
+  height: 180px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 19px;
+}
+.line-offer:hover .line-offer-title {
+  color: var(--orange);
+}
+.line-offer-img {
+  width: 240px;
+  height: 180px;
+  background-color: #c3cbd4;
+}
+.line-offer-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.line-offer-text {
+  margin: 15px 0 15px 29px;
+}
+.line-offer-title {
+  font-size: 2.2rem;
+  line-height: 26px;
+  margin-bottom: 7px;
+}
+.line-offer-price {
+  font-size: 2rem;
+  line-height: 23px;
+  color: var(--orange);
+}
+
+/* BOX-OFFER */
+.box-offer {
+  margin-top: 44px;
+  width: var(--center);
+}
+.box-offer a:hover {
+  text-decoration: underline;
+}
+.box-offer-container {
+  width: 70%;
+  height: 607px;
+  background-color: white;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 27px;
+}
+.box-offer-img {
+  width: 700px;
+  height: 400px;
+  background-color: #c3cbd4;
+}
+.box-offer-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.box-offer-infos {
+  height: 156px;
+  padding: 27px 29px;
+}
+.box-offer-infos-title {
+  font-size: 2.6rem;
+  line-height: 3rem;
+  margin-bottom: 11px;
+}
+.box-offer-user {
+  width: calc(30% - 18px);
+  height: 195px;
+  background-color: white;
+  margin-left: 18px;
+  padding: 19px 0;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.box-offer-user-padding {
+  padding-left: 22px;
+  padding-right: 22px;
+  box-sizing: border-box;
+}
+.box-offer-user > hr {
+  width: calc(100%-1px);
+  padding: 0;
+  text-align: center;
+  border: 1px solid #e6ebef;
+  margin: 13px 0 27px 0;
+}
+.box-offer-user-username {
+  margin-bottom: 5px;
+}
+.box-offer-user-button {
+  width: 100%;
+  height: 44px;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.icon-cart-plus {
+  margin-right: 10px;
 }
