@@ -26,9 +26,12 @@ const Offers = props => {
 
   return (
     <div className="offers d-flex flex-column align-center">
-      <div className="orange-ellipse"></div>
-
-      <Search />
+      <div className="offers-top d-flex flex-column align-center">
+        <div className="orange-ellipse-container">
+          <div className="orange-ellipse"></div>
+        </div>
+        <Search />
+      </div>
       {!isLoading ? (
         data.offers.map((offer, index) => {
           const offerLink = '/offer/' + offer._id;

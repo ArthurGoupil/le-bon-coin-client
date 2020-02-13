@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Header = () => {
+const Header = ({ setdisplayModalConnect, user, setUser }) => {
+  const history = useHistory();
   return (
     <header className="d-flex flex-column align-center">
       <div className="header-top d-flex justify-center">
-        <div className="header-top-center d-flex align-center space-between">
-          <div className="header-top-center-left d-flex space-between align-center">
+        <div className="header-top-container d-flex align-center space-between">
+          <div className="header-top-container-left d-flex space-between align-center">
             <Link to="/">
               <h1>
                 <svg
@@ -41,10 +44,29 @@ const Header = () => {
               </NavLink>
             </div>
           </div>
-          <div className="user-connect hover-header d-flex flex-column align-center justify-center is-15">
-            <FontAwesomeIcon className="icon-user" icon={['far', 'user']} />
-            <span>Se connecter</span>
-          </div>
+          {user ? (
+            <button
+              className="user-connect hover-header d-flex flex-column align-center justify-center is-15"
+              onClick={() => {
+                Cookies.remove('userToken');
+                setUser(null);
+                history.push('/');
+              }}
+            >
+              <FontAwesomeIcon className="icon-user" icon={['far', 'user']} />
+              <span>Se déconnecter</span>
+            </button>
+          ) : (
+            <button
+              className="user-connect hover-header d-flex flex-column align-center justify-center is-15"
+              onClick={() => {
+                setdisplayModalConnect(true);
+              }}
+            >
+              <FontAwesomeIcon className="icon-user" icon={['far', 'user']} />
+              <span>Se connecter</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

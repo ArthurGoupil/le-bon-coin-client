@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Search = props => {
+const Search = () => {
   return (
     <div className="search-box d-flex justify-center align-center">
       <div className="search-box-input-icon">
