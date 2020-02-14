@@ -6,6 +6,8 @@
   --orange: #f36025;
   --dark-orange: #c0562a;
   --blue: #4183d7;
+  --dark-blue: hsl(214, 60%, 45%);
+  --border-grey: #e6ebef;
   --grey-text-input: #768696;
   --grey-background-input: #f4f6f7;
   --background: #f9f9f9;
@@ -41,6 +43,16 @@ header {
 main {
   margin-top: 60px;
   background-color: var(--background);
+  min-height: calc(100vh - 140px);
+}
+h2 {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+}
+h3 {
+  font-weight: bold;
+  margin-bottom: 18px;
 }
 footer {
   background-color: #3e3e3e;
@@ -54,6 +66,13 @@ footer {
 a {
   text-decoration: none;
   color: var(--black);
+}
+input {
+  padding: 1px 10px;
+  box-sizing: border-box;
+}
+b {
+  font-weight: bold;
 }
 
 /* FLEXBOX */
@@ -83,6 +102,9 @@ a {
 .is-bld,
 .is-bld a {
   font-weight: bold;
+}
+.is-centered {
+  text-align: center;
 }
 .is-blue {
   color: var(--blue);
@@ -171,15 +193,73 @@ a {
 }
 .modal-connect-box {
   width: 600px;
-  height: 500px;
   background-color: white;
+}
+.modal-connect-box-top {
+  padding: 21px 77px 0 77px;
+  border-bottom: 1px solid var(--border-grey);
+}
+.modal-connect-box-title:after {
+  margin: 21px 0 33px 0;
+  display: block;
+  content: '';
+  width: 100%;
+  border-bottom: 3px solid var(--orange);
+}
+.modal-connect-box-top > form {
+  width: 100%;
+}
+.modal-connect-box-top > form > input {
+  width: 100%;
+  border-radius: 5px;
+  height: 44px;
+  margin-bottom: 28px;
+}
+.modal-connect-box-top > form > input:not(.modal-connect-box-submit) {
+  border: 1px solid #d9e0eb;
+}
+.modal-connect-box-top > form > label {
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+}
+.modal-connect-box-submit {
+  background-color: var(--blue);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.modal-connect-box-submit:hover {
+  background-color: var(--dark-blue);
+}
+.modal-connect-box-bottom {
+  padding: 21px 77px 30px 77px;
+  text-align: center;
+}
+.modal-connect-box-bottom > div {
+  margin-bottom: 21px;
+}
+.modal-connect-box-bottom-sign-up {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  border-radius: 5px;
+}
+.modal-connect-box-bottom-sign-up:hover {
+  background-color: var(--background);
 }
 .icon-close {
   position: absolute;
-  font-size: 40px;
+  font-size: 4rem;
   top: 30px;
   right: 30px;
   color: white;
+  cursor: pointer;
 }
 
 /* HEADER STYLING */
@@ -407,7 +487,7 @@ a {
   width: calc(100%-1px);
   padding: 0;
   text-align: center;
-  border: 1px solid #e6ebef;
+  border: 1px solid var(--border-grey);
   margin: 13px 0 27px 0;
 }
 .box-offer-user-username {
@@ -424,4 +504,86 @@ a {
 }
 .icon-cart-plus {
   margin-right: 10px;
+}
+
+/* SIGN-UP PAGE */
+.sign-up-bloc {
+  width: var(--container);
+  background-color: white;
+  margin: 38px 0;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.sign-up-bloc-left {
+  width: 60%;
+  margin-right: 100px;
+}
+.sign-up-bloc-left-line {
+  padding: 30px 0;
+}
+.icon-sign-up {
+  font-size: 3.8rem;
+  color: var(--blue);
+}
+.icon-sign-up-container {
+  width: 20%;
+}
+.sign-up-bloc-left-text {
+  width: 80%;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}
+.sign-up-bloc-right {
+  width: 40%;
+}
+.sign-up-bloc-right input:not([type='checkbox']):not([type='submit']) {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--border-grey);
+  border-radius: 5px;
+}
+.sign-up-bloc-right input[type='checkbox'] {
+  margin: 19px 0;
+  margin-right: 15px;
+}
+.sign-up-bloc-right input[type='submit'] {
+  width: 100%;
+  height: 44px;
+  margin-right: 15px;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.sign-up-bloc-right label:not(.cgu-cgv) {
+  font-size: 13px;
+  line-height: 15px;
+  font-weight: bold;
+  margin: 19px 0;
+}
+.cgu-cgv {
+  font-size: 13px;
+  line-height: 15px;
+  /* font-weight: bold; */
+  margin: 19px 0;
+}
+.sign-up-bloc-right-passwords {
+  width: 100%;
+  margin-top: 19px;
+}
+.sign-up-bloc-right-passwords > div {
+  width: 50%;
+}
+.sign-up-bloc-right-passwords input {
+  width: calc(100% - 10px);
+  margin-top: 19px;
+}
+.sign-up-bloc-right-passwords div:last-child input {
+  margin-left: 10px;
+}
+.error-message {
+  margin-bottom: 19px;
+  color: red;
 }

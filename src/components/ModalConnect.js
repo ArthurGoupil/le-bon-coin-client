@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ModalConnect = ({ setdisplayModalConnect, setUser }) => {
+const ModalConnect = ({ setDisplayModalConnect, setUser }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
@@ -32,13 +32,13 @@ const ModalConnect = ({ setdisplayModalConnect, setUser }) => {
         const response = await axios.post(
           'https://leboncoin-api.herokuapp.com/api/user/log_in',
           {
-            email: email,
-            password: password
+            email,
+            password
           }
         );
         Cookies.set('userToken', response.data.token, { expires: 30 });
         setUser({ token: response.data.token });
-        setdisplayModalConnect(false);
+        setDisplayModalConnect(false);
         setErrorMessage(null);
         history.push('/');
       } catch (e) {
@@ -50,39 +50,67 @@ const ModalConnect = ({ setdisplayModalConnect, setUser }) => {
 
   return (
     <>
-      <div className="modal-connect d-flex justify-center align-center">
+      <div
+        id="modal-connect-id"
+        className="modal-connect d-flex justify-center align-center"
+        onClick={event => {
+          if (
+            event.target.className ===
+            'modal-connect d-flex justify-center align-center'
+          ) {
+            setDisplayModalConnect(false);
+          }
+        }}
+      >
         <div className="modal-connect-box">
-          <form
-            className="d-flex flex-column align-center"
-            onSubmit={handleSubmit}
-          >
-            <label>Adresse email</label>
-            <input
-              name="email"
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <label>Password</label>
-            <input
-              name="password"
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <input name="submit" type="submit" value="Se connecter" />
-            <span>{errorMessage}</span>
-          </form>
-
-          <div>Vous n'avez pas de compte ?</div>
-          <button>Créer un compte</button>
+          <div className="modal-connect-box-top">
+            <h2 className="modal-connect-box-title is-centered">Connexion</h2>
+            <form
+              className="d-flex flex-column align-center"
+              onSubmit={handleSubmit}
+            >
+              <label>Adresse email</label>
+              <input
+                name="email"
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <label>Mot de passe</label>
+              <input
+                name="password"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <input
+                className="modal-connect-box-submit is-bld is-16"
+                name="submit"
+                type="submit"
+                value="Se connecter"
+              />
+              <span>{errorMessage}</span>
+            </form>
+          </div>
+          <div className="modal-connect-box-bottom">
+            <div className="is-16 is-bld">Vous n'avez pas de compte ?</div>
+            <Link
+              className="modal-connect-box-bottom-sign-up d-flex justify-center align-center is-bld is-16"
+              to="/sign-up"
+              onClick={() => {
+                setDisplayModalConnect(false);
+              }}
+            >
+              Créer un compte
+            </Link>
+          </div>
         </div>
 
         <FontAwesomeIcon
           className="icon-close"
           icon={['fas', 'times']}
           onClick={() => {
-            setdisplayModalConnect(false);
+            setDisplayModalConnect(false);
           }}
         />
       </div>

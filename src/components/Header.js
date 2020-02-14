@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Header = ({ setdisplayModalConnect, user, setUser }) => {
+const Header = ({ setDisplayModalConnect, user, setUser }) => {
   const history = useHistory();
   return (
     <header className="d-flex flex-column align-center">
@@ -60,7 +60,7 @@ const Header = ({ setdisplayModalConnect, user, setUser }) => {
             <button
               className="user-connect hover-header d-flex flex-column align-center justify-center is-15"
               onClick={() => {
-                setdisplayModalConnect(true);
+                setDisplayModalConnect(true);
               }}
             >
               <FontAwesomeIcon className="icon-user" icon={['far', 'user']} />
