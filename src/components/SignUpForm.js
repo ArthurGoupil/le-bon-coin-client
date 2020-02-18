@@ -34,7 +34,6 @@ const SignUp = ({ setUser }) => {
   const handleAcceptConditionsChange = event => {
     const checked = event.target.checked;
     setAcceptConditions(checked);
-    console.log(acceptConditions);
   };
   const handleSubmit = async event => {
     event.preventDefault();
@@ -47,7 +46,7 @@ const SignUp = ({ setUser }) => {
     } else {
       try {
         const response = await axios.post(
-          'https://leboncoin-api.herokuapp.com/api/user/sign_up',
+          'https://le-bon-coin-reacteur.herokuapp.com/user/sign_up',
           {
             username: pseudo,
             email: email,
@@ -61,7 +60,6 @@ const SignUp = ({ setUser }) => {
         history.push('/');
       } catch (e) {
         setErrorMessage('Adresse email ou mot de passe incorrect.');
-        console.error('test');
       }
     }
   };

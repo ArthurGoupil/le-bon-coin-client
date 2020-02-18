@@ -30,7 +30,7 @@ const ModalConnect = ({ setDisplayModalConnect, setUser }) => {
     } else {
       try {
         const response = await axios.post(
-          'https://leboncoin-api.herokuapp.com/api/user/log_in',
+          'https://le-bon-coin-reacteur.herokuapp.com/user/log_in',
           {
             email,
             password

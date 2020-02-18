@@ -15,9 +15,7 @@ const Offers = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let pageLink = `https://leboncoin-api.herokuapp.com/api/offer/with-count?skip=${(pageParams -
-        1) *
-        10}&limit=10`;
+      const pageLink = `https://le-bon-coin-reacteur.herokuapp.com/offer/with-count?page=${pageParams}`;
       try {
         const response = await axios.get(pageLink);
         setData(response.data);

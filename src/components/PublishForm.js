@@ -30,12 +30,12 @@ const PublishForm = ({ user, setDisplayModalConnect }) => {
     formData.append('description', description);
     formData.append('price', price);
     for (let i = 0; i < photos.length; i++) {
-      formData.append('files'[i], photos[i]);
+      formData.append('files', photos[i]);
     }
 
     try {
       const response = await axios.post(
-        'https://leboncoin-api.herokuapp.com/api/offer/publish',
+        'https://le-bon-coin-reacteur.herokuapp.com/offer/publish',
         formData,
         {
           headers: {

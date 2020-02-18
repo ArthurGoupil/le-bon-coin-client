@@ -11,13 +11,12 @@ const BlocOffer = ({ id }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
-
   useEffect(() => {
-    const offerLink = 'https://leboncoin-api.herokuapp.com/api/offer/' + id;
+    const offerLink = 'https://le-bon-coin-reacteur.herokuapp.com/offer/' + id;
     const fetchData = async () => {
       try {
         const response = await axios.get(offerLink);
-        setData(response.data);
+        setData(response.data.offer);
         setIsLoading(false);
       } catch (e) {
         console.error(e.message);
@@ -25,6 +24,8 @@ const BlocOffer = ({ id }) => {
     };
     fetchData();
   }, [id]);
+
+  console.log(data);
 
   return (
     <>
@@ -54,7 +55,7 @@ const BlocOffer = ({ id }) => {
                 >
                   {data.pictures.map((picture, index) => {
                     return (
-                      <div className="bloc-offer-img-container">
+                      <div key={index} className="bloc-offer-img-container">
                         <img
                           className="bloc-offer-img"
                           alt={data.title}
@@ -102,7 +103,12 @@ const BlocOffer = ({ id }) => {
               <button
                 className="bloc-offer-user-button orange-button-hover is-16 is-bld"
                 onClick={() => {
-                  history.push(`/offer/${id}/payment`);
+                  history.push(`/offer/${id}/payment`, {
+                    title: data.title,
+                    price: data.price,
+                    picture: data.pictures[0],
+                    username: data.creator.account.username
+                  });
                 }}
               >
                 <FontAwesomeIcon
