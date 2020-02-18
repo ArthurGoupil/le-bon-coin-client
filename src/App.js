@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Elements, StripeProvider } from 'react-stripe-elements';
 import Cookies from 'js-cookie';
 import './App.css';
 
@@ -14,15 +15,24 @@ import {
 import {
   faSearch,
   faCartPlus,
-  faTimes
+  faTimes,
+  faChevronLeft,
+  faChevronRight,
+  faCamera
 } from '@fortawesome/free-solid-svg-icons';
 
 import Header from './components/Header';
-import Offers from './pages/Offers';
-import Offer from './pages/Offer';
 import Footer from './components/Footer';
 import ModalConnect from './components/ModalConnect';
-import SignUp from './components/SignUp';
+import CheckoutForm from './components/CheckoutForm';
+
+import Offers from './pages/Offers';
+import Offer from './pages/Offer';
+import SignUp from './pages/SignUp';
+import Publish from './pages/Publish';
+import Search from './pages/Search';
+import Home from './pages/Home';
+import Payment from './pages/Payment';
 
 library.add(
   faUser,
@@ -32,13 +42,16 @@ library.add(
   faTimes,
   faClock,
   faBell,
-  faEye
+  faEye,
+  faChevronLeft,
+  faChevronRight,
+  faCamera
 );
 
 const App = () => {
   const [displayModalConnect, setDisplayModalConnect] = useState(false);
-
   const tokenFromCookie = Cookies.get('userToken');
+
   let userState;
   if (tokenFromCookie) {
     userState = { token: tokenFromCookie };
@@ -53,14 +66,35 @@ const App = () => {
         <main>
           <div className="main-container d-flex align-center flex-column">
             <Switch>
+              <Route path="/offers/search=:search">
+                <Search />
+              </Route>
+              <Route path="/offers/page=:pageParams">
+                <Offers />
+              </Route>
+              <StripeProvider
+                path="/offer/:id/payment"
+                exact
+                apiKey="pk_test_3wCBGY9I5ld0aq265YrTOKn100EuFn0tg4"
+              >
+                <Elements>
+                  <Payment></Payment>
+                </Elements>
+              </StripeProvider>
+              <Route path="/offer/publish">
+                <Publish
+                  user={user}
+                  setDisplayModalConnect={setDisplayModalConnect}
+                />
+              </Route>
               <Route path="/offer/:id">
-                <Offer></Offer>
+                <Offer />
               </Route>
               <Route path="/sign-up">
                 <SignUp setUser={setUser} />
               </Route>
               <Route path="/">
-                <Offers></Offers>
+                <Home />
               </Route>
             </Switch>
           </div>
@@ -75,10 +109,6 @@ const App = () => {
           <ModalConnect
             setDisplayModalConnect={setDisplayModalConnect}
             setUser={setUser}
-            onRequestClose={() => {
-              setDisplayModalConnect(false);
-            }}
-            shouldCloseOnOverlayClick={false}
           />
         )}
       </Router>

@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import defaultImage from '../assets/images/default-image.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const LineOffer = ({ title, pictures, price, created }) => {
   const [src, setSrc] = useState(pictures[0]);
+
+  useEffect(() => {
+    setSrc(pictures[0]);
+  }, [pictures]);
+
   return (
     <div className="line-offer d-flex">
       <div className="line-offer-img">
         {pictures[0] ? (
-          <img
-            alt={title}
-            src={src}
-            onError={() => {
-              return setSrc(defaultImage);
-            }}
-          />
+          <>
+            <img
+              alt={title}
+              src={src}
+              onError={() => {
+                return setSrc(defaultImage);
+              }}
+            />
+            <div className="line-offer-img-number is-13 d-flex justify-center align-center">
+              <FontAwesomeIcon
+                className="icon-camera"
+                icon={['fas', 'camera']}
+              />
+              <span className="is-bld">{pictures.length}</span>
+            </div>
+          </>
         ) : (
           <img alt="{title} default" src={defaultImage} />
         )}

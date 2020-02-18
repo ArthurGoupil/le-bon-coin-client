@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
+import nl2br from 'react-nl2br';
+import Carousel from 'nuka-carousel';
+import { useHistory } from 'react-router-dom';
 
 const BlocOffer = ({ id }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const offerLink = 'https://leboncoin-api.herokuapp.com/api/offer/' + id;
@@ -25,24 +29,68 @@ const BlocOffer = ({ id }) => {
   return (
     <>
       {!isLoading ? (
-        <div className="box-offer d-flex">
-          <div className="box-offer-container">
-            <div className="box-offer-img">
-              <img alt={data.title} src={data.pictures[0]} />
+        <div className="bloc-offer d-flex">
+          <div className="bloc-offer-container">
+            <div>
+              {data.pictures.length > 1 ? (
+                <Carousel
+                  wrapAround={true}
+                  renderCenterLeftControls={({ previousSlide }) => (
+                    <button
+                      className="d-flex justify-center align-center button-carousel"
+                      onClick={previousSlide}
+                    >
+                      <FontAwesomeIcon icon={['fas', 'chevron-left']} />
+                    </button>
+                  )}
+                  renderCenterRightControls={({ nextSlide }) => (
+                    <button
+                      className="d-flex justify-center align-center button-carousel"
+                      onClick={nextSlide}
+                    >
+                      <FontAwesomeIcon icon={['fas', 'chevron-right']} />
+                    </button>
+                  )}
+                >
+                  {data.pictures.map((picture, index) => {
+                    return (
+                      <div className="bloc-offer-img-container">
+                        <img
+                          className="bloc-offer-img"
+                          alt={data.title}
+                          src={data.pictures[index]}
+                        />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              ) : (
+                <div className="bloc-offer-img-container">
+                  <img
+                    className="bloc-offer-img"
+                    alt={data.title}
+                    src={data.pictures[0]}
+                  />
+                </div>
+              )}
             </div>
-            <div className="box-offer-infos d-flex flex-column space-between">
+            <div className="bloc-offer-infos d-flex flex-column space-between">
               <div>
-                <div className="box-offer-infos-title">{data.title}</div>
+                <h2 className="bloc-offer-infos-title">{data.title}</h2>
                 <div className="is-20 is-orange">{data.price}&nbsp;€</div>
               </div>
               <div className="is-16">
                 <Moment format="DD/MM/YYYY à HH:mm">{data.created}</Moment>
               </div>
             </div>
+            <div className="bloc-offer-description is-19">
+              <h3>Description</h3>
+              {nl2br(data.description)}
+            </div>
           </div>
-          <aside className="box-offer-user">
-            <div className="box-offer-user-padding d-flex flex-column">
-              <Link to="#" className="box-offer-user-username is-23 is-bld">
+          <aside className="bloc-offer-user">
+            <div className="bloc-offer-user-padding d-flex flex-column">
+              <Link to="#" className="bloc-offer-user-username is-23 is-bld">
                 {data.creator.account.username}
               </Link>
               <Link to="#" className="is-19 is-bld is-blue is-blue">
@@ -50,8 +98,13 @@ const BlocOffer = ({ id }) => {
               </Link>
             </div>
             <hr></hr>
-            <div className="box-offer-user-padding">
-              <button className="box-offer-user-button orange-button-hover is-16 is-bld">
+            <div className="bloc-offer-user-padding">
+              <button
+                className="bloc-offer-user-button orange-button-hover is-16 is-bld"
+                onClick={() => {
+                  history.push(`/offer/${id}/payment`);
+                }}
+              >
                 <FontAwesomeIcon
                   className="icon-cart-plus"
                   icon={['fas', 'cart-plus']}

@@ -10,7 +10,7 @@ const Header = ({ setDisplayModalConnect, user, setUser }) => {
     <header className="d-flex flex-column align-center">
       <div className="header-top d-flex justify-center">
         <div className="header-top-container d-flex align-center space-between">
-          <div className="header-top-container-left d-flex space-between align-center">
+          <div className="header-top-container-left d-flex align-center">
             <Link to="/">
               <h1>
                 <svg
@@ -27,15 +27,20 @@ const Header = ({ setDisplayModalConnect, user, setUser }) => {
                 </svg>
               </h1>
             </Link>
-            <button className="post-offer-button-header orange-button-hover d-flex align-center">
-              <FontAwesomeIcon
-                className="icon-plus"
-                icon={['far', 'plus-square']}
-              />
-              &nbsp;<span className="is-16">Déposer une annonce</span>
-            </button>
+            {user && (
+              <Link
+                to="/offer/publish"
+                className="post-offer-button-header orange-button-hover d-flex align-center"
+              >
+                <FontAwesomeIcon
+                  className="icon-plus"
+                  icon={['far', 'plus-square']}
+                />
+                &nbsp;<span className="is-16">Déposer une annonce</span>
+              </Link>
+            )}
             <div className="search-header d-flex align-center">
-              <NavLink to="/" exact={true} activeClassName="selected-header">
+              <NavLink to="/offers" activeClassName="selected-header">
                 <FontAwesomeIcon
                   className="icon-search"
                   icon={['fas', 'search']}

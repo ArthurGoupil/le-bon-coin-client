@@ -32,8 +32,9 @@ const SignUp = ({ setUser }) => {
     setPasswordConfirm(value);
   };
   const handleAcceptConditionsChange = event => {
-    const value = event.target.checked;
-    setAcceptConditions(value);
+    const checked = event.target.checked;
+    setAcceptConditions(checked);
+    console.log(acceptConditions);
   };
   const handleSubmit = async event => {
     event.preventDefault();
@@ -110,14 +111,14 @@ const SignUp = ({ setUser }) => {
       <div className="sign-up-bloc-right">
         <h2>Créez un compte</h2>
         <form className="d-flex flex-column" onSubmit={handleSubmit}>
-          <label>Pseudo *</label>
+          <label htmlFor="pseudo">Pseudo *</label>
           <input
             name="pseudo"
             type="text"
             value={pseudo}
             onChange={handlePseudoChange}
           />
-          <label>Adresse email *</label>
+          <label htmlFor="email">Adresse email *</label>
           <input
             name="email"
             type="email"
@@ -126,7 +127,7 @@ const SignUp = ({ setUser }) => {
           />
           <div className="sign-up-bloc-right-passwords d-flex align-center">
             <div>
-              <label>Mot de passe *</label>
+              <label htmlFor="password">Mot de passe *</label>
               <input
                 name="password"
                 type="password"
@@ -135,7 +136,9 @@ const SignUp = ({ setUser }) => {
               />
             </div>
             <div>
-              <label>Confirmez le mot de passe *</label>
+              <label htmlFor="password-confirm">
+                Confirmez le mot de passe *
+              </label>
               <input
                 name="password-confirm"
                 type="password"
@@ -148,10 +151,9 @@ const SignUp = ({ setUser }) => {
             <input
               name="CGV-CGU"
               type="checkbox"
-              value={acceptConditions}
               onChange={handleAcceptConditionsChange}
             />
-            <label className="cgu-cgv">
+            <label htmlFor="CGV-CGU" className="cgu-cgv">
               « J’accepte les{' '}
               <Link to="#" className="is-blue">
                 <b>Conditions Générales de Vente</b>

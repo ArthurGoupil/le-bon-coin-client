@@ -69,14 +69,14 @@ const ModalConnect = ({ setDisplayModalConnect, setUser }) => {
               className="d-flex flex-column align-center"
               onSubmit={handleSubmit}
             >
-              <label>Adresse email</label>
+              <label htmlFor="email">Adresse email</label>
               <input
                 name="email"
                 type="email"
                 value={email}
                 onChange={handleEmailChange}
               />
-              <label>Mot de passe</label>
+              <label htmlFor="password">Mot de passe</label>
               <input
                 name="password"
                 type="password"
